@@ -55,9 +55,9 @@ shinyUI(fluidPage(
         I'm not exactly sure what all the variables mean (what is Class?), but
         these were given in the file PilotMater.csv. These do pretty much
         what you would expect -- we can filter down to samples collected in certain
-        dates, and based on the class and subject id's. Note that I'm not plotting
-        any variables with missing date entries, but I could include them (or include them
-        with a checkbox) if that would be interesting.
+        dates, and based on the class and subject id's. Note that the date filtering
+        does not apply to the QC samples, which don't have a date associated, so these
+        will still appear unless you unselect the QC box.
 
         Caution: When viewing a few spectra at a time, if a filtering option would
         remove all the spectra, the filtering action is NOT executed. This behavior

@@ -14,14 +14,15 @@ shinyServer(function(input, output) {
     # Filter by date
     dates <- as.Date(cur_data@sam_data$Date, "%m/%d/%y")
     rm_dates <- (dates > input$date_range[2]) | (dates < input$date_range[1])
-    rm_dates[is.na(rm_dates)] <- TRUE # remove the NA dates...
+    rm_dates[is.na(rm_dates)] <- FALSE # remove the NA dates...
     if(length(rm_dates) > 0) {
       cur_data@spectra@.Data <- cur_data@spectra[!rm_dates,,drop=F]
       cur_data@sam_data@.Data <- cur_data@sam_data[!rm_dates,,drop=F]
     }
 
     for(filter_var in c("Sample.Label", "Class", "Class.1", "Subject")) {
-      if(input[[filter_var]][1] == "All") {
+      print(input)
+      if(length(input[[filter_var]]) > 0 && input[[filter_var]][1] == "All") {
         filter_ix <- 1:nrow(cur_data@spectra)
       } else {
         filter_ix <- which(cur_data@sam_data[[filter_var]] %in% factor(input[[filter_var]]))
